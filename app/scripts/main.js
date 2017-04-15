@@ -8,12 +8,12 @@ $(function(){
         gridItemSize:0.5,
         gridItemDotSize:0.3,
         gridItemBorderWidth:4,
-        gridItemBorderColor:'#ec7072',
-        gridItemDotColor:'#ec4620',
+        gridItemBorderColor:'#fafafa',
+        gridItemDotColor:'#fafafa',
         lineWidth:10,
-        lineColor:'#ec4620',
-        doneGridItemDotColor:'#518ac4',
-        doneLineColor:'#518ac4'
+        lineColor:'#fafafa',
+        doneGridItemDotColor:'#91ddff',
+        doneLineColor:'#91ddff'
     };
     var gridItemSize=CANVAS_SIZE/3;
     defaults.gridItemSize=defaults.gridItemSize*gridItemSize;
@@ -24,7 +24,6 @@ $(function(){
     canvas.height=CANVAS_SIZE;
     var context=canvas.getContext('2d');
 
-    drawGrid();
     //当前绘制状态
     var drawState={};
     drawState.isStart=false;
@@ -42,6 +41,20 @@ $(function(){
     canvas.addEventListener('touchstart',startEvent,false);
     canvas.addEventListener('touchend',endEvent,false);
     canvas.addEventListener('touchmove',moveEvent,false);
+
+    //网格渐渐显现
+    context.globalAlpha=0;
+    var countAlpha=0;
+    var showTimer=setInterval(function(){
+        countAlpha+=20;
+        context.globalAlpha=countAlpha/1000;
+        context.clearRect(0,0,CANVAS_SIZE,CANVAS_SIZE);
+        drawGrid();
+        if(context.globalAlpha===1){
+            clearInterval(showTimer);
+        }
+    },20);
+
     //开始手势
     function startEvent(e){
         drawState.isStart=true;
@@ -50,17 +63,29 @@ $(function(){
     //结束手势
     function endEvent(e){
         drawState.isStart=false;
-        repaint();
+        if(password.length>0){//输入了密码
+            repaint();
 
-        //手势完成,判断密码是否正确
-
-        //密码清空
-        password=[];
+            //手势完成,判断密码是否正确
+            var pd=localStorage.getItem('password');
+            if(pd!==null){
+                if(pd.toString()===password.toString()){
+                    alert('密码正确');
+                }else{
+                    alert('密码不正确');
+                }
+            }else{
+                localStorage.setItem('password',password);
+                alert('密码设置成功');
+            }
+            //密码清空
+            password=[];
+        }
     }
     //手势绘制中
     function moveEvent(e){
         if(drawState.isStart){
-            if(e.type.indexOf("touch")>-1){
+            if(e.type.indexOf('touch')>-1){
                 e = e.touches[0]||e.changedTouches[0];
             }
             var x=e.clientX-CANVAS_OFFSET.left;
