@@ -1,0 +1,55 @@
+// bower:scss
+// endbower
+@import "_normalize";
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+html{
+  height:100%;
+}
+body {
+  height:100%;
+  background: #fafafa;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #333;
+}
+#main{
+  height:100%;
+  background-color: #518ac4;
+}
+#grid{
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:10%;
+  left:0;
+  margin:auto;
+  background-color: #ccfcff;
+}
+@media screen and (max-width: 768px){
+  #grid{
+    width:300px;
+    height:300px;
+  }
+}
+@media screen and (min-width: 768px){
+  #grid{
+    width:400px;
+    height:400px;
+  }
+}
+@media screen and (min-width: 992px) {
+  #grid{
+    width:500px;
+    height:500px;
+  }
+}
+@media screen and(min-width: 1200px){
+  #grid{
+    width:600px;
+    height:600px;
+  }
+}
