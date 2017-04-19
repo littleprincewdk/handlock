@@ -70,13 +70,19 @@ $(function(){
             var pd=localStorage.getItem('password');
             if(pd!==null){
                 if(pd.toString()===password.toString()){
-                    alert('密码正确');
+                    setTimeout(function(){
+                        alert('密码正确');
+                    },0);
                 }else{
-                    alert('密码不正确');
+                    setTimeout(function(){
+                        alert('密码不正确');
+                    },0);
                 }
             }else{
                 localStorage.setItem('password',password);
-                alert('密码设置成功');
+                setTimeout(function(){
+                    alert('密码设置成功');
+                },0);
             }
             //密码清空
             password=[];

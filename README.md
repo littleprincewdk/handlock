@@ -1,2 +1,3 @@
-#2017.04.15 下午完成主要内容,晚上完成使用本地存储存储密码
-#h5 canvas 手势解锁,兼容web和移动端
+h5 canvas 手势解锁,兼容web和移动端
+-
+[demo](princekin.tjxuechuang.com/projects/handlock)
